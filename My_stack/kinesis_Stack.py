@@ -11,11 +11,11 @@ class Kinesis(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        Stream=_kinesis.CfnStream(self, "MyCfnStream",
-                           name="Ec2-Stream-Firehose",
-                           retention_period_hours=24,  #
-                           shard_count=1,
-                           stream_mode_details=_kinesis.CfnStream.StreamModeDetailsProperty(
+        Stream = _kinesis.CfnStream(self, "MyCfnStream",
+                                    name="Ec2-Stream-Firehose",
+                                    retention_period_hours=24,  #
+                                    shard_count=1,
+                                    stream_mode_details=_kinesis.CfnStream.StreamModeDetailsProperty(
                                         stream_mode="provisioned")
-                           )
-        Stream_arn=Stream.attr_arn()
+                                    )
+

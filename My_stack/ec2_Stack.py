@@ -1,6 +1,7 @@
 from aws_cdk import (
     # Duration,
     Stack, aws_ec2 as _ec2
+
     # aws_sqs as sqs,)
 )
 import aws_cdk as cdk
@@ -15,7 +16,7 @@ class EC2(Stack):
                                    "importVPC",
                                    vpc_id="vpc-0efbae3722b5b51c9")
         #Read Bootstrap Script
-        with open('bootstrap_script/install_http.sh',mode="r") as file:
+        with open('bootstrap_script/install_http.sh', mode="r") as file:
             user_data=file.read()
 
 
@@ -25,7 +26,7 @@ class EC2(Stack):
                       instance_type=_ec2.InstanceType(instance_type_identifier="t2.micro"),
                       instance_name="happymetogetfirstec2",
                       machine_image=_ec2.AmazonLinuxImage(),
-                      user_data=_ec2.UserData.custom(user_data)
+                      user_data=_ec2.UserData.custom(user_data),
                       )
 
 

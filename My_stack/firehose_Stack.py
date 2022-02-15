@@ -1,10 +1,10 @@
 from aws_cdk import (
     # Duration,
     Stack, aws_kinesisfirehose as _firehose
+
     # aws_sqs as sqs,)
 )
-from s3_Stack import S3
-from kinesis_Stack import Kinesis
+
 from constructs import Construct
 
 
@@ -14,17 +14,18 @@ class Firehose(Stack):
         super().__init__(scope, construct_id, **kwargs)
         _firehose.CfnDeliveryStreamProps(
                     s3_destination_configuration=_firehose.CfnDeliveryStream.S3DestinationConfigurationProperty(
-                        bucket_arn=S3.Bucket_arn,
-                        role_arn="roleArn",
+                        bucket_arn='arn:aws:s3:::s3newpiyusbhomale1999/*',
+                        role_arn="arn:aws:iam::993560847451:role/Firehose-Role-To-access-Kinesis-s3",
                         # the properties below are optional
                         buffering_hints=_firehose.CfnDeliveryStream.BufferingHintsProperty(
                             interval_in_seconds=60,
-                            size_in_mBs=1
+                            size_in_m_bs=1
                         )
                     ),
                     kinesis_stream_source_configuration=
                     _firehose.CfnDeliveryStream.KinesisStreamSourceConfigurationProperty(
-                                            kinesis_stream_arn=Kinesis.Stream_arn,
-                                            role_arn="roleArn")
+                                            kinesis_stream_arn='arn:aws:kinesis:::Ec2-Stream-Firehose',
+                                            role_arn="arn:aws:iam::993560847451:role/Firehose-Role-To-access-Kinesis-s3"
+                    )
         )
 
