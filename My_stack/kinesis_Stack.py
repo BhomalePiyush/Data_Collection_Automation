@@ -11,7 +11,7 @@ class Kinesis(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        Stream = _kinesis.CfnStream(self, "MyCfnStream",
+        stream = _kinesis.CfnStream(self, "MyCfnStream",
                                     name="Ec2-Stream-Firehose",
                                     retention_period_hours=24,  #
                                     shard_count=1,

@@ -1,10 +1,10 @@
 from aws_cdk import (
     # Duration,
-    Stack, aws_ec2 as _ec2
+    Stack, aws_ec2 as _ec2,
+    aws_iam as _iam
 
     # aws_sqs as sqs,)
 )
-import aws_cdk as cdk
 from constructs import Construct
 
 class EC2(Stack):
@@ -21,13 +21,30 @@ class EC2(Stack):
 
 
         # ec2 instance creation
-        _ec2.Instance(self, "Instance1",
-                      vpc=vpc,
-                      instance_type=_ec2.InstanceType(instance_type_identifier="t2.micro"),
-                      instance_name="happymetogetfirstec2",
-                      machine_image=_ec2.AmazonLinuxImage(),
-                      user_data=_ec2.UserData.custom(user_data),
-                      )
+        bot=_ec2.Instance(self, "Instance1",
+                          instance_type=_ec2.InstanceType(instance_type_identifier="t2.micro"),
+                          instance_name="happymetogetfirstec2",
+                          machine_image=_ec2.AmazonLinuxImage(
+                            generation=_ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+                            ),
+                          block_devices=[_ec2.BlockDevice(
+                              device_name="/dev/sdb",
+                              volume=_ec2.BlockDeviceVolume.ebs(5)
+                                                           )
+                          ],
+                          user_data=_ec2.UserData.custom(user_data),
+                          key_name='ec2-access1',
+                          vpc=vpc,
+                          vpc_subnets=_ec2.SubnetSelection(
+                             subnet_type=_ec2.SubnetType.PUBLIC
+                             ),
+                          )
+        # add permissions to access services
+        bot.role.add_managed_policy(
+            _iam.ManagedPolicy.from_aws_managed_policy_name(
+                "AccessPolicy1"
+            )
+        )
 
 
         # The code that defines your stack goes here
