@@ -19,6 +19,6 @@ firehos = Firehose(app, "Firehose-transport", env=env_dev)
 firehos.add_dependency(kinesis,"kinesis should be present to start firehos")
 ec2 = EC2(app, "Source-of-Stream-Data", env=env_dev)
 ec2.add_dependency(kinesis, "Kinesis should be present to start push_records()")
-LoaderS3(app,"CodeLoader", env=env_dev)
+LoaderS3(app, "CodeLoader", env=env_dev)
 
 app.synth()

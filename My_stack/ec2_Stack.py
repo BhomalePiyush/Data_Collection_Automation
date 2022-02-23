@@ -37,7 +37,9 @@ class EC2(Stack):
                             user_data=_ec2.UserData.custom(user_data),
                             key_name='ec2-access1',
                             vpc=vpc,
-
+                            security_group=_ec2.SecurityGroup.from_security_group_id(self, "SG", "sg-01ed140b60852210c",
+                                                                                     mutable=False
+                                                                                     ),
                             vpc_subnets=_ec2.SubnetSelection(
                                 subnet_type=_ec2.SubnetType.PUBLIC
                             )
