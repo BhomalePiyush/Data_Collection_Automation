@@ -12,7 +12,7 @@ class Firehose(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        _firehose.CfnDeliveryStream(self,"streamtos3bucket",
+        _firehose.CfnDeliveryStream(self, "streamtos3bucket",
                                     delivery_stream_name="Streams-to-S3",
                                     delivery_stream_type="KinesisStreamAsSource",
                                     s3_destination_configuration=_firehose.CfnDeliveryStream.S3DestinationConfigurationProperty(
