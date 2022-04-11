@@ -54,5 +54,6 @@ command.
  * `cdk deploy`      deploy this stack to your default AWS account/region
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
+![Screenshot (98)](https://user-images.githubusercontent.com/91361449/162784554-fa9f5dee-d070-4866-ab35-8be6e25b6526.png)
 
 Enjoy!
